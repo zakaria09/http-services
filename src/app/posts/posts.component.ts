@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { url } from 'inspector';
 
 @Component({
   selector: 'app-posts',
@@ -29,6 +28,13 @@ export class PostsComponent implements OnInit {
       post['id'] = res['id'];
       this.posts.splice(0, 0, post)
     })
+  }
+
+  updatePost(post) {
+    this.Http.patch(this.url + '/' + post.id, post)
+      .subscribe(result => {
+        console.log(result);
+      })
   }
 
 }
